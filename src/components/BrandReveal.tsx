@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function BrandReveal() {
+export default function BrandReveal({ onEnter }) {
   const [showNewSchool, setShowNewSchool] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function BrandReveal() {
     <div className="relative h-screen w-screen bg-black overflow-hidden">
       <AnimatePresence mode="wait">
         {!showNewSchool ? (
-          /* LAYER 1: CAMI TEACHES KOREAN (The Departure) */
+          /* LAYER 1: CAMI TEACHES KOREAN */
           <motion.div
             key="cami-layer"
             initial={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
@@ -41,7 +41,7 @@ export default function BrandReveal() {
             </motion.div>
           </motion.div>
         ) : (
-          /* LAYER 2: FUTURE FOCUS (The Arrival) */
+          /* LAYER 2: FUTURE FOCUS */
           <motion.div
             key="future-focus"
             initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
@@ -56,7 +56,6 @@ export default function BrandReveal() {
               background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 40%, #D64C72 100%)',
             }}
           >
-            {/* Subtle Texture Overlay */}
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
 
             <div className="z-10 flex flex-col items-center text-center px-4">
@@ -80,10 +79,12 @@ export default function BrandReveal() {
                 LANGUAGE AND TRAINING INSTITUTE
               </p>
 
-              {/* UPDATED: GLOWING BUTTON LOGIC */}
+              {/* ONLY THE WHITE GLOWING BUTTON REMAINS */}
               <motion.button
-                initial={{ boxShadow: "0 0 0px rgba(255, 255, 255, 0)" }}
+                onClick={onEnter}
+                initial={{ boxShadow: "0 0 0px rgba(255, 255, 255, 0)", opacity: 0 }}
                 animate={{ 
+                  opacity: 1,
                   boxShadow: [
                     "0 0 0px rgba(255, 255, 255, 0)", 
                     "0 0 25px rgba(255, 255, 255, 0.6)", 
@@ -91,13 +92,12 @@ export default function BrandReveal() {
                   ] 
                 }}
                 transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
+                  opacity: { delay: 1, duration: 0.8 },
+                  boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" } 
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="mt-12 px-10 py-4 bg-white text-[#1B4332] font-black rounded-full shadow-xl uppercase tracking-widest hover:bg-pink-50 transition-all"
+                className="mt-12 px-10 py-4 bg-white text-[#1B4332] font-black rounded-full shadow-xl uppercase tracking-widest hover:bg-pink-50 transition-all text-sm"
               >
                 Enter Campus
               </motion.button>
