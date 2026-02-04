@@ -37,10 +37,44 @@ export default function CampusDashboard() {
       {/* Background Textures */}
       <div className="absolute inset-0 opacity-25 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
 
-      <nav className="bg-white/10 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#1B4332] font-black text-xs">FF</div>
-          <span className="font-black text-white tracking-tighter uppercase">Future Focus</span>
+      {/* UPDATED NAV: SIDE-BY-SIDE LOGOS */}
+      <nav className="bg-white/10 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center sticky top-0 z-50">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 bg-white/5 rounded-2xl p-1.5 pr-4 border border-white/10">
+            {/* Cami Logo */}
+            <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg">
+              <img 
+                src="/CamiTeachesKorean_Logo.png" 
+                alt="Cami Teaches Korean" 
+                className="w-full h-auto" 
+              />
+            </div>
+
+            {/* Divider Line */}
+            <div className="w-[1px] h-6 bg-white/20 mx-1" />
+
+            {/* Future Focus Logo & Name */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-lg">
+                <img 
+                  src="/FutureFocus_Logo.png" 
+                  alt="Future Focus" 
+                  className="w-full h-auto" 
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-black text-white text-[10px] tracking-tighter uppercase leading-none">Future Focus</span>
+                <span className="text-[7px] text-white/40 font-bold uppercase tracking-widest mt-0.5">Language and Training Institute</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE BADGE */}
+        <div className="hidden md:block">
+          <div className="px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
+            Official Enrollment Portal
+          </div>
         </div>
       </nav>
 
