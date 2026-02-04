@@ -3,14 +3,26 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function BrandReveal({ onEnter }) {
+export default function BrandReveal({ onEnter }: { onEnter: () => void }) {
   const [showNewSchool, setShowNewSchool] = useState(false);
 
   useEffect(() => {
-    // Dramatic pause for the Cami Logo before the transition
-    const timer = setTimeout(() => setShowNewSchool(true), 4000);
-    return () => clearTimeout(timer);
-  }, []);
+    // LAYER 1 DURATION: 2 Seconds
+    const transitionTimer = setTimeout(() => {
+      setShowNewSchool(true);
+    }, 2000);
+
+    // LAYER 2 DURATION: 2 Seconds (Total 4s from start)
+    // Automatically enters the dashboard after the second layer has been visible
+    const autoEnterTimer = setTimeout(() => {
+      onEnter();
+    }, 4000);
+
+    return () => {
+      clearTimeout(transitionTimer);
+      clearTimeout(autoEnterTimer);
+    };
+  }, [onEnter]);
 
   return (
     <div className="relative h-screen w-screen bg-black overflow-hidden">
@@ -24,7 +36,7 @@ export default function BrandReveal({ onEnter }) {
               opacity: 0, 
               filter: "blur(40px)", 
               scale: 1.1,
-              transition: { duration: 2, ease: "easeInOut" } 
+              transition: { duration: 1, ease: "easeInOut" } 
             }}
             className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#FFB6C1]"
           >
@@ -39,6 +51,9 @@ export default function BrandReveal({ onEnter }) {
                 <img src="/CamiTeachesKorean_Logo.png" alt="Cami Logo" className="w-full h-auto" />
               </div>
             </motion.div>
+            <p className="mt-8 text-[#ff1493] font-black uppercase tracking-[0.3em] animate-pulse">
+              
+            </p>
           </motion.div>
         ) : (
           /* LAYER 2: FUTURE FOCUS */
@@ -62,7 +77,7 @@ export default function BrandReveal({ onEnter }) {
               <motion.div 
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 className="bg-white p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] mb-8 border-b-8 border-[#1B4332]"
               >
                 <img 
@@ -79,28 +94,18 @@ export default function BrandReveal({ onEnter }) {
                 LANGUAGE AND TRAINING INSTITUTE
               </p>
 
-              {/* ONLY THE WHITE GLOWING BUTTON REMAINS */}
-              <motion.button
-                onClick={onEnter}
-                initial={{ boxShadow: "0 0 0px rgba(255, 255, 255, 0)", opacity: 0 }}
-                animate={{ 
-                  opacity: 1,
-                  boxShadow: [
-                    "0 0 0px rgba(255, 255, 255, 0)", 
-                    "0 0 25px rgba(255, 255, 255, 0.6)", 
-                    "0 0 0px rgba(255, 255, 255, 0)"
-                  ] 
-                }}
-                transition={{ 
-                  opacity: { delay: 1, duration: 0.8 },
-                  boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" } 
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="mt-12 px-10 py-4 bg-white text-[#1B4332] font-black rounded-full shadow-xl uppercase tracking-widest hover:bg-pink-50 transition-all text-sm"
-              >
-                Enter Campus
-              </motion.button>
+              {/* AUTO-LOADING BAR (Replaces static button feel) */}
+              <div className="mt-12 w-48 h-1 bg-white/20 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.8, ease: "linear" }}
+                  className="h-full bg-white"
+                />
+              </div>
+              <p className="mt-4 text-white/40 text-[10px] font-bold uppercase tracking-widest">
+                Entering Campus...
+              </p>
             </div>
           </motion.div>
         )}
