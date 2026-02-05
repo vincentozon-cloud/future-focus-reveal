@@ -3,8 +3,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Remove 'default' here to match the new import style
-export function CourseGrid() {
+// Define the interface for the prop we are passing down
+interface CourseGridProps {
+  onEnroll: (courseName: string) => void;
+}
+
+export function CourseGrid({ onEnroll }: CourseGridProps) {
   const courses = [
     {
       title: "EPS-TOPIK BOOT CAMP",
@@ -47,7 +51,15 @@ export function CourseGrid() {
               <p className="text-slate-600 text-sm font-medium">📅 Starts: {course.starts}</p>
               <p className="text-slate-600 text-sm font-medium">⏰ {course.schedule}</p>
               <div className="pt-4">
-                <a href={course.enrollLink} target="_blank" className="block w-full text-center py-4 rounded-xl font-bold bg-slate-900 text-white">
+                {/* We call onEnroll(course.title) to save to Supabase, 
+                   then let the link open the enrollment form in a new tab.
+                */}
+                <a 
+                  href={course.enrollLink} 
+                  target="_blank" 
+                  onClick={() => onEnroll(course.title)}
+                  className="block w-full text-center py-4 rounded-xl font-bold bg-slate-900 text-white"
+                >
                   ENROLL NOW
                 </a>
               </div>

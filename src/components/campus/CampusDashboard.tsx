@@ -13,7 +13,8 @@ const images = [
   '/gallery5.jpg',
 ];
 
-export default function CampusDashboard() {
+// We add the onEnroll prop here so the Dashboard can receive the function from page.tsx
+export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: string) => void }) {
   const [index, setIndex] = useState(0);
 
   const next = () => setIndex((prev) => (prev + 1) % images.length);
@@ -117,7 +118,8 @@ export default function CampusDashboard() {
       </header>
 
       <div className="relative z-10">
-        <CourseGrid />
+        {/* Pass the onEnroll function down to the grid where the buttons are */}
+        <CourseGrid onEnroll={onEnroll} />
 
         {/* GALLERY SECTION */}
         <div className="max-w-6xl mx-auto px-4 my-16 group">

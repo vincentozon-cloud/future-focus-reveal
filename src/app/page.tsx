@@ -1,5 +1,6 @@
 'use client';
 
+import { supabase } from '@/lib/supabase';
 import { useState } from 'react';
 import BrandReveal from '../components/campus/BrandReveal';
 import CampusDashboard from '../components/campus/CampusDashboard';
@@ -7,15 +8,34 @@ import CampusDashboard from '../components/campus/CampusDashboard';
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false);
 
+  // We add 'className' here so we know which button was clicked
+  const handleEnroll = async (courseName: string) => {
+    const { data, error } = await supabase
+      .from('enrollment')
+      .insert([
+        { 
+          full_name: 'Interested Student', 
+          course_interest: courseName, // "EPS-TOPIK with Cami" or "Elem Korean with Meeko"
+          source: 'google_seo',
+        }
+      ]);
+
+    if (error) {
+      console.error('Error:', error.message);
+    } else {
+      alert(`Interest registered for ${courseName}!`);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black">
       {!showDashboard ? (
         <BrandReveal onEnter={() => setShowDashboard(true)} />
       ) : (
         <div className="animate-fadeIn">
-          <CampusDashboard />
+          {/* We pass the function down to the Dashboard here */}
+          <CampusDashboard onEnroll={handleEnroll} />
           
-          {/* THE NEWS FRAME (The "Active Pulse" we discussed) */}
           <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-50">
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
               <div className="relative flex h-3 w-3">
