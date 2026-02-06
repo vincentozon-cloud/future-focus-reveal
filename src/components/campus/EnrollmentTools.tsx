@@ -76,33 +76,33 @@ export function EnrollmentTools() {
         className="space-y-6"
       >
         <div className="bg-slate-200 h-80 rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-white">
-          {/* Real Metroview Building Location */}
-          <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4283570624024!2d120.98822457590547!3d14.57463588590881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ad815e828eaf%3A0x779f8233a2d58c03!2sMetroview%20Building!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"
-          className="w-full h-full border-0"
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-        
-        <div className="p-6 bg-white rounded-[2rem] shadow-xl border border-slate-100 flex items-center justify-between">
-          <div>
-            <h4 className="font-black text-slate-900 uppercase italic tracking-tighter">Visit Our Campus</h4>
-            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-tight">
-              Unit 407-409, 4th Floor, Metroview Building <br/>
-              942 Quirino Ave, Malate, Manila
-            </p>
-          </div>
-          <a 
-           href="https://maps.google.com/?cid=8619751370097265667&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center"
-            >
-            Open Maps
-          </a>
-        </div>
+          {/* Real Antonio Center Location */}
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.0733856149814!2d121.03157597584447!3d14.451792480084321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d02008f1b62f%3A0x6b499839c063167!2sAntonio%20Center!5e0!3m2!1sen!2sph!4v1707240000000!5m2!1sen!2sph"
+        className="w-full h-full border-0"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+    
+    <div className="p-6 bg-white rounded-[2rem] shadow-xl border border-slate-100 flex items-center justify-between">
+      <div>
+        <h4 className="font-black text-slate-900 uppercase italic tracking-tighter">Visit Our Campus</h4>
+        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-tight">
+          Unit 301, 3rd Floor 8 Antonio Center Bldg. Prime St., Madrigal Business Park <br/>
+          Brgy. Ayala Alabang, Muntinlupa City Metro Manila
+        </p>
+      </div>
+      <a 
+        href="https://maps.app.goo.gl/pW8vT5uD2i4CgYVz9" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center"
+      >
+        Open Maps
+      </a>
+    </div>
       </motion.div>
     </section>
   );

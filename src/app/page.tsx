@@ -2,8 +2,8 @@
 
 import { supabase } from '@/lib/supabase';
 import { useState } from 'react';
-import BrandReveal from '../components/campus/BrandReveal';
-import CampusDashboard from '../components/campus/CampusDashboard';
+import BrandReveal from '@/components/campus/BrandReveal';
+import CampusDashboard from '@/components/campus/CampusDashboard';
 
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false);

@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     'Future Focus Korean',
     'Cami teaches Korean',
     'Hangul for beginners',
-    'Work in South Korea'
+    'Work in South Korea',
+    'Factory Worker in South Korea'
   ],
 };
 
