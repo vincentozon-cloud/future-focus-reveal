@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* CUSTOM SCANNER ANIMATION */
+@keyframes scanMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(94px);
+  }
+}
+
+.animate-scanMove {
+  animation: scanMove 2s linear infinite alternate;
+}

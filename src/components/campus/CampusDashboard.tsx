@@ -13,8 +13,8 @@ const images = [
   '/gallery5.jpg',
 ];
 
-// We add the onEnroll prop here so the Dashboard can receive the function from page.tsx
-export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: string) => void }) {
+// Added lang prop to the interface
+export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (courseName: string) => void, lang?: string }) {
   const [index, setIndex] = useState(0);
 
   const next = () => setIndex((prev) => (prev + 1) % images.length);
@@ -29,14 +29,10 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen relative overflow-hidden"
-      style={{
-        backgroundColor: '#1a2e26',
-        backgroundImage: `radial-gradient(circle at center, #2d4a3e 0%, #1a2e26 100%), url("https://www.transparenttextures.com/patterns/asfalt-light.png")`,
-      }}
+      className="min-h-screen relative overflow-hidden bg-transparent" // CHANGED: Set to transparent
     >
-      {/* Background Textures */}
-      <div className="absolute inset-0 opacity-25 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
+      {/* Background Textures - Kept subtle for depth but transparent */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
 
       {/* UPDATED NAV: SIDE-BY-SIDE LOGOS */}
       <nav className="bg-white/10 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center sticky top-0 z-50">
@@ -64,8 +60,12 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-black text-white text-[10px] tracking-tighter uppercase leading-none">Future Focus</span>
-                <span className="text-[7px] text-white/40 font-bold uppercase tracking-widest mt-0.5">Language and Training Institute</span>
+                <span className="font-black text-white text-[10px] tracking-tighter uppercase leading-none">
+                  {lang === 'ko' ? '퓨처 포커스' : 'Future Focus'}
+                </span>
+                <span className="text-[7px] text-white/40 font-bold uppercase tracking-widest mt-0.5">
+                  {lang === 'ko' ? '언어 및 교육 기관' : 'Language and Training Institute'}
+                </span>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
         {/* RIGHT SIDE BADGE */}
         <div className="hidden md:block">
           <div className="px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
-            Official Enrollment Portal
+            {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
           </div>
         </div>
       </nav>
@@ -87,13 +87,15 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
           transition={{ duration: 1 }}
         >
           <h2 className="text-yellow-400 text-xs md:text-sm font-bold uppercase tracking-[0.6em] mb-4 drop-shadow-sm">
-            Welcome to the Official Portal
+            {lang === 'ko' ? '공식 포털에 오신 것을 환영합니다' : 'Welcome to the Official Portal'}
           </h2>
           
-          <h1 className="text-white text-4xl md:text-6xl font-light tracking-tight leading-tight">
-            <span className="font-black block mb-2 tracking-tighter uppercase">Future Focus</span>
+          <h1 className="text-white text-4xl md:text-6xl font-light tracking-tight leading-tight" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+            <span className="font-black block mb-2 tracking-tighter uppercase">
+              {lang === 'ko' ? '퓨처 포커스' : 'Future Focus'}
+            </span>
             <span className="text-2xl md:text-3xl font-serif italic text-white/80 block border-t border-white/10 pt-4 mt-4 max-w-2xl mx-auto">
-              Language and Training Institute
+              {lang === 'ko' ? '언어 및 교육 기관' : 'Language and Training Institute'}
             </span>
           </h1>
 
@@ -111,21 +113,20 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
               <span className="relative rounded-full h-2 w-2 bg-green-500"></span>
             </div>
             <p className="text-[10px] text-white/70 font-bold uppercase tracking-widest">
-              Academic Notice: Korean Class Level 1 starts Monday
+              {lang === 'ko' ? '학사 공지: 한국어 수업 레벨 1 월요일 시작' : 'Academic Notice: Korean Class Level 1 starts Monday'}
             </p>
           </div>
         </motion.div>
       </header>
 
       <div className="relative z-10">
-        {/* Pass the onEnroll function down to the grid where the buttons are */}
-        <CourseGrid onEnroll={onEnroll} />
+        {/* Pass the lang prop down to CourseGrid */}
+        <CourseGrid onEnroll={onEnroll} lang={lang} />
 
         {/* GALLERY SECTION */}
         <div className="max-w-6xl mx-auto px-4 my-16 group">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-1 overflow-hidden shadow-2xl">
             <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden rounded-2xl bg-black/40">
-              
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={index} 
@@ -167,8 +168,12 @@ export default function CampusDashboard({ onEnroll }: { onEnroll: (courseName: s
           {/* SOCIAL SECTION */}
           <div className="mt-20 mb-12 text-center relative z-20">
             <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2">Stay Connected</h2>
-              <h3 className="text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter">Follow us on<span className="text-pink-500">:</span></h3>
+              <h2 className="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2">
+                {lang === 'ko' ? '함께하세요' : 'Stay Connected'}
+              </h2>
+              <h3 className="text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+                {lang === 'ko' ? '팔로우 하기' : 'Follow us on'}<span className="text-pink-500">:</span>
+              </h3>
               <div className="h-1 w-12 bg-yellow-400 mx-auto mt-4 rounded-full" />
             </motion.div>
 
