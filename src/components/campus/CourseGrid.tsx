@@ -40,7 +40,7 @@ export function CourseGrid({ onEnroll, lang = 'en' }: CourseGridProps) {
           <motion.div
             key={index}
             whileHover={{ y: -8 }}
-            className="bg-white rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100 flex flex-col"
+            className="bg-white rounded-4xl overflow-hidden shadow-2xl border border-slate-100 flex flex-col"
           >
             <div className="p-8 text-white" style={{ backgroundColor: course.color }}>
               <h3 className="text-2xl font-black uppercase italic tracking-tighter">{course.title}</h3>

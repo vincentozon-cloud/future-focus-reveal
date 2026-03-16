@@ -48,7 +48,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
             </div>
 
             {/* Divider Line */}
-            <div className="w-[1px] h-6 bg-white/20 mx-1" />
+            <div className="w-px h-6 bg-white/20 mx-1" />
 
             {/* Future Focus Logo & Name */}
             <div className="flex items-center gap-3">
@@ -101,9 +101,9 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
 
           {/* ELEGANT DIVIDER */}
           <div className="flex items-center justify-center gap-4 mt-8 opacity-30">
-            <div className="h-[1px] w-12 bg-white" />
+            <div className="h-px w-12 bg-white" />
             <div className="w-2 h-2 rounded-full border border-white rotate-45" />
-            <div className="h-[1px] w-12 bg-white" />
+            <div className="h-px w-12 bg-white" />
           </div>
 
           {/* REFINED NEWS BULLETIN */}
@@ -126,7 +126,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
         {/* GALLERY SECTION */}
         <div className="max-w-6xl mx-auto px-4 my-16 group">
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-1 overflow-hidden shadow-2xl">
-            <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden rounded-2xl bg-black/40">
+            <div className="relative h-100 md:h-150 w-full overflow-hidden rounded-2xl bg-black/40">
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={index} 
@@ -191,7 +191,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
                   className="group relative flex items-center bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 shadow-2xl overflow-hidden"
                   whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
                 >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]" style={{ color: social.color }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-360" style={{ color: social.color }}>
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 filter drop-shadow-md">
                       {social.svg}
                     </svg>
@@ -199,7 +199,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
                   <span className="ml-3 text-white font-sans font-black uppercase tracking-tighter text-lg italic transition-all duration-300 group-hover:text-yellow-400">
                     {social.full}
                   </span>
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-500 group-hover:w-full" style={{ backgroundColor: social.color }} />
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full" style={{ backgroundColor: social.color }} />
                 </motion.a>
               ))}
             </div>
@@ -211,7 +211,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
 
       <footer className="py-20 text-center relative z-10">
         <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest">
-          Powered by <div className="w-[1px] h-4 bg-white/20" /> eMVeOzHub
+          Powered by <div className="w-px h-4 bg-white/20" /> eMVeOzHub
         </div>
       </footer>
     </motion.div>

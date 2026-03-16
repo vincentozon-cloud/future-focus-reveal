@@ -43,7 +43,7 @@ export default function Home() {
             `,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60 opacity-80" />
+        <div className="absolute inset-0 bg-linear-to-trom-black via-transparent to-black/60 opacity-80" />
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
       </div>
 
@@ -52,9 +52,9 @@ export default function Home() {
           <BrandReveal onEnter={() => setShowDashboard(true)} lang={lang} />
         </div>
       ) : (
-        <div className="relative z-10 animate-fadeIn duration-[2000ms] min-h-screen">
+        <div className="relative z-10 animate-fadeIn duration-2000 min-h-screen">
           
-          <div className="fixed top-6 right-6 z-[70] flex items-center gap-3">
+          <div className="fixed top-6 right-6 z-70 flex items-center gap-3">
             <LanguageSelector onLangChange={(l) => setLang(l)} />
             <button 
               onClick={() => setIsLoginOpen(!isLoginOpen)}
@@ -64,7 +64,7 @@ export default function Home() {
             </button>
           </div>
 
-          <div className={`fixed left-0 top-0 h-full w-full md:w-[400px] z-[60] transition-transform duration-1000 ease-in-out transform ${isLoginOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className={`fixed left-0 top-0 h-full w-full md:w-100 z-60 transition-transform duration-1000 ease-in-out transform ${isLoginOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className="h-full bg-black/40 backdrop-blur-3xl border-r border-white/10 p-8 flex flex-col justify-center shadow-2xl">
               <div className="mb-10 text-white">
                 <h2 className="text-4xl font-extrabold tracking-tighter uppercase italic">{t('welcome')}</h2>
@@ -93,7 +93,7 @@ export default function Home() {
                     />
 
                     <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
-                      <div className="w-full h-[2px] bg-green-400 shadow-[0_0_15px_#4ade80] animate-scanMove"></div>
+                      <div className="w-full h-0.5 bg-green-400 shadow-[0_0_15px_#4ade80] animate-scanMove"></div>
                     </div>
 
                     <svg className="w-10 h-10 text-green-400/80 z-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
 
           <div 
-            className={`relative z-10 h-full transition-all duration-1000 ${isLoginOpen ? 'md:ml-[400px] blur-md md:blur-none' : 'ml-0'}`}
+            className={`relative z-10 h-full transition-all duration-1000 ${isLoginOpen ? 'md:ml-100 blur-md md:blur-none' : 'ml-0'}`}
             onClick={() => isLoginOpen && setIsLoginOpen(false)}
           >
             <CampusDashboard onEnroll={handleEnroll} lang={lang} />

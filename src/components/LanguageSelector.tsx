@@ -26,7 +26,7 @@ export default function LanguageSelector({ onLangChange }: { onLangChange: (l: s
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-32 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-[80] overflow-hidden">
+        <div className="absolute right-0 mt-3 w-32 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-80 overflow-hidden">
           {languages.map((l) => (
             <button
               key={l.lang}
