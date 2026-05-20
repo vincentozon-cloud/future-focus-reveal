@@ -1,7 +1,7 @@
 'use client';
 
 import { supabase } from '@/lib/supabase';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BrandReveal from '@/components/campus/BrandReveal';
 import CampusDashboard from '@/components/campus/CampusDashboard';
 import LanguageSelector from '@/components/LanguageSelector'; 
@@ -15,6 +15,13 @@ export default function Home() {
   const [lang, setLang] = useState('en');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
+  // 1. Check if the intro has already been played in this browser session
+  useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('introPlayed') === 'true') {
+      setShowDashboard(true);
+    }
+  }, []);
+
   const t = (key: string) => translations[lang][key] || key;
 
   const handleEnroll = async (courseName: string) => {
@@ -24,6 +31,15 @@ export default function Home() {
 
     if (error) console.error('Error:', error.message);
     else alert(lang === 'ko' ? `${courseName}에 대한 관심이 등록되었습니다!` : `Interest registered for ${courseName}!`);
+  };
+
+  // 2. The new trigger function when BrandReveal finishes
+  const handleRevealComplete = () => {
+    setShowDashboard(true);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('introPlayed', 'true');
+      window.dispatchEvent(new Event('showNavbar')); // Broadcasts to Navbar.tsx
+    }
   };
 
   return (
@@ -49,10 +65,12 @@ export default function Home() {
 
       {!showDashboard ? (
         <div className="relative z-10">
-          <BrandReveal onEnter={() => setShowDashboard(true)} lang={lang} />
+          {/* 3. Pass the new handleRevealComplete function here */}
+          <BrandReveal onEnter={handleRevealComplete} lang={lang} />
         </div>
       ) : (
         <div className="relative z-10 animate-fadeIn duration-2000 min-h-screen">
+          {/* ... THE REST OF YOUR EXISTING DASHBOARD CODE REMAINS EXACTLY THE SAME ... */}
           
           <div className="fixed top-6 right-6 z-70 flex items-center gap-3">
             <LanguageSelector onLangChange={(l) => setLang(l)} />
@@ -63,6 +81,8 @@ export default function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
             </button>
           </div>
+          
+          {/* ... keep the rest of your isLoginOpen panels and CampusDashboard exactly as they were ... */}
 
           <div className={`fixed left-0 top-0 h-full w-full md:w-100 z-60 transition-transform duration-1000 ease-in-out transform ${isLoginOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className="h-full bg-black/40 backdrop-blur-3xl border-r border-white/10 p-8 flex flex-col justify-center shadow-2xl">
