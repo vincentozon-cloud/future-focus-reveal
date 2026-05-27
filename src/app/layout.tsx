@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/components/ThemeProvider"; // 1. Import the provider
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,17 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Future Focus Language Training Center | Cami teaches Korean | Top Korean Language School & EPS-TOPIK Training',
-  description: 'Enroll at Future Focus, the leading Korean Language Center. Specialized EPS-TOPIK review, Hangul for beginners, and work-in-Korea preparation. Appear Top 3 on Google with eMVeOzHub SEO.',
-  keywords: [
-    'Korean Language School Malate, Manila',
-    'EPS-TOPIK Training Center',
-    'Learn Korean Philippines',
-    'Future Focus Korean',
-    'Cami teaches Korean',
-    'Hangul for beginners',
-    'Work in South Korea',
-    'Factory Worker in South Korea'
-  ],
+  description: 'Enroll at Future Focus, the leading Korean Language Center. Specialized EPS-TOPIK review, Hangul for beginners, and work-in-Korea preparation.',
 };
 
 export default function RootLayout({
@@ -34,12 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500`}>
+        {/* 2. Wrap everything in the ThemeProvider */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

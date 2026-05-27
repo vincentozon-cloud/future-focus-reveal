@@ -33,49 +33,45 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
       {/* Background Textures */}
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
 
-      {/* NOTE: The old internal <nav> block was removed here. 
-        The global src/components/Navbar.tsx now handles the top-level navigation. 
-      */}
-
-      {/* REFINED ACADEMIC HEADER - Increased pt-20 to pt-32 to clear the global Navbar */}
+      {/* REFINED ACADEMIC HEADER */}
       <header className="px-6 pt-32 pb-12 text-center max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          {/* RIGHT SIDE BADGE - Moved here from the old nav */}
+          {/* RIGHT SIDE BADGE */}
           <div className="inline-block mb-6 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
             {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
           </div>
 
-          <h2 className="text-yellow-400 text-xs md:text-sm font-bold uppercase tracking-[0.6em] mb-4 drop-shadow-sm">
+          <h2 className="text-emerald-700 dark:text-yellow-400 text-xs md:text-sm font-bold uppercase tracking-[0.6em] mb-4 drop-shadow-sm transition-colors">
             {lang === 'ko' ? '공식 포털에 오신 것을 환영합니다' : 'Welcome to the Official Portal'}
           </h2>
           
-          <h1 className="text-white text-4xl md:text-6xl font-light tracking-tight leading-tight" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-slate-900 dark:text-white text-4xl md:text-6xl font-light tracking-tight leading-tight transition-colors" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <span className="font-black block mb-2 tracking-tighter uppercase">
               {lang === 'ko' ? '퓨처 포커스' : 'Future Focus'}
             </span>
-            <span className="text-2xl md:text-3xl font-serif italic text-white/80 block border-t border-white/10 pt-4 mt-4 max-w-2xl mx-auto">
+            <span className="text-2xl md:text-3xl font-serif italic text-slate-600 dark:text-white/80 block border-t border-slate-300 dark:border-white/10 pt-4 mt-4 max-w-2xl mx-auto transition-colors">
               {lang === 'ko' ? '언어 및 교육 기관' : 'Language and Training Institute'}
             </span>
           </h1>
 
           {/* ELEGANT DIVIDER */}
-          <div className="flex items-center justify-center gap-4 mt-8 opacity-30">
-            <div className="h-px w-12 bg-white" />
-            <div className="w-2 h-2 rounded-full border border-white rotate-45" />
-            <div className="h-px w-12 bg-white" />
+          <div className="flex items-center justify-center gap-4 mt-8 opacity-50 dark:opacity-30">
+            <div className="h-px w-12 bg-slate-400 dark:bg-white transition-colors" />
+            <div className="w-2 h-2 rounded-full border border-slate-400 dark:border-white rotate-45 transition-colors" />
+            <div className="h-px w-12 bg-slate-400 dark:bg-white transition-colors" />
           </div>
 
           {/* REFINED NEWS BULLETIN */}
-          <div className="mt-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 inline-flex items-center gap-3">
+          <div className="mt-10 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-full px-6 py-2 inline-flex items-center gap-3 shadow-lg dark:shadow-none transition-colors">
             <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="animate-ping absolute h-full w-full rounded-full bg-green-500 dark:bg-green-400 opacity-75"></span>
+              <span className="relative rounded-full h-2 w-2 bg-green-600 dark:bg-green-500"></span>
             </div>
-            <p className="text-[10px] text-white/70 font-bold uppercase tracking-widest">
+            <p className="text-[10px] text-slate-700 dark:text-white/70 font-bold uppercase tracking-widest transition-colors">
               {lang === 'ko' ? '학사 공지: 한국어 수업 레벨 1 월요일 시작' : 'Academic Notice: Korean Class Level 1 starts Monday'}
             </p>
           </div>
@@ -83,13 +79,12 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
       </header>
 
       <div className="relative z-10">
-        {/* Pass the lang prop down to CourseGrid */}
         <CourseGrid onEnroll={onEnroll} lang={lang} />
 
         {/* GALLERY SECTION */}
         <div className="max-w-6xl mx-auto px-4 my-16 group">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-1 overflow-hidden shadow-2xl">
-            <div className="relative h-100 md:h-150 w-full overflow-hidden rounded-2xl bg-black/40">
+          <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-3xl p-1 overflow-hidden shadow-2xl transition-colors">
+            <div className="relative h-100 md:h-150 w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-black/40 transition-colors">
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={index} 
@@ -104,7 +99,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
 
               {/* NAVIGATION ARROWS */}
               <button onClick={prev} className="absolute left-6 top-1/2 -translate-y-1/2 z-30 group/btn">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-pink-500 group-hover/btn:border-pink-400 group-hover/btn:scale-110 opacity-0 group-hover:opacity-100">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-pink-500 group-hover/btn:border-pink-400 group-hover/btn:scale-110 opacity-0 group-hover:opacity-100 group-hover/btn:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6 group-hover/btn:-translate-x-1 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                   </svg>
@@ -112,7 +107,7 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
               </button>
 
               <button onClick={next} className="absolute right-6 top-1/2 -translate-y-1/2 z-30 group/btn">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-300 group-hover/btn:scale-110 group-hover/btn:text-[#1B4332] opacity-0 group-hover:opacity-100">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-300 group-hover/btn:scale-110 group-hover/btn:text-[#1B4332] opacity-0 group-hover:opacity-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6 group-hover/btn:translate-x-1 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                   </svg>
@@ -124,17 +119,17 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
           {/* DOTS */}
           <div className="flex justify-center gap-3 mt-6">
             {images.map((_, i) => (
-              <button key={i} onClick={() => setIndex(i)} className={`h-1 rounded-full transition-all duration-500 ${i === index ? 'w-12 bg-yellow-400' : 'w-3 bg-white/20'}`} />
+              <button key={i} onClick={() => setIndex(i)} className={`h-1 rounded-full transition-all duration-500 ${i === index ? 'w-12 bg-yellow-400' : 'w-3 bg-slate-300 dark:bg-white/20'}`} />
             ))}
           </div>
 
           {/* SOCIAL SECTION */}
           <div className="mt-20 mb-12 text-center relative z-20">
             <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2">
+              <h2 className="text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2 transition-colors">
                 {lang === 'ko' ? '함께하세요' : 'Stay Connected'}
               </h2>
-              <h3 className="text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+              <h3 className="text-slate-900 dark:text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter transition-colors" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 {lang === 'ko' ? '팔로우 하기' : 'Follow us on'}<span className="text-pink-500">:</span>
               </h3>
               <div className="h-1 w-12 bg-yellow-400 mx-auto mt-4 rounded-full" />
@@ -151,15 +146,15 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex items-center bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 shadow-2xl overflow-hidden"
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                  className="group relative flex items-center bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 shadow-xl overflow-hidden"
+                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.4)' }}
                 >
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-360" style={{ color: social.color }}>
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 filter drop-shadow-md">
                       {social.svg}
                     </svg>
                   </div>
-                  <span className="ml-3 text-white font-sans font-black uppercase tracking-tighter text-lg italic transition-all duration-300 group-hover:text-yellow-400">
+                  <span className="ml-3 text-slate-800 dark:text-white font-sans font-black uppercase tracking-tighter text-lg italic transition-all duration-300 group-hover:text-yellow-500 dark:group-hover:text-yellow-400">
                     {social.full}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full" style={{ backgroundColor: social.color }} />
@@ -173,8 +168,8 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
       </div>
 
       <footer className="py-20 text-center relative z-10">
-        <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest">
-          Powered by <div className="w-px h-4 bg-white/20" /> eMVeOzHub
+        <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-widest transition-colors">
+          Powered by <div className="w-px h-4 bg-slate-300 dark:bg-white/20" /> eMVeOzHub
         </div>
       </footer>
     </motion.div>

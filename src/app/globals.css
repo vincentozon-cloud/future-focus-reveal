@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Tailwind v4 now uses the 'dark' class automatically if you define it */
+@layer base {
+  :root {
+    /* Define your light mode variables here if needed */
+  }
+  
+  .dark {
+    /* This empty class is the bridge for next-themes */
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
