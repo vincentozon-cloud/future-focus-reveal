@@ -42,7 +42,8 @@ export default function Home() {
       </div>
 
       {/* FLOATING ACTION BUTTONS */}
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+      {/* FIXED: Shifted down to top-24 so it doesn't overlap the fixed Navbar */}
+      <div className="fixed top-24 right-6 z-50 flex items-center gap-3">
         <LanguageSelector onLangChange={(l) => setLang(l)} />
         <button 
           onClick={() => setIsLoginOpen(!isLoginOpen)}

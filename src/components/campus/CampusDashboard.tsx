@@ -24,12 +24,11 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
   }, [index]);
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="relative w-full bg-transparent"
-    >
+    // FIX: Swapped motion.div for a standard div to bypass the React 19 visibility bug
+    <div className="relative w-full bg-transparent">
       <div className="relative z-10 pt-4">
+        
+        {/* THIS IS YOUR DASHBOARD CONTENT */}
         <CourseGrid onEnroll={onEnroll} lang={lang} />
 
         {/* GALLERY SECTION */}
@@ -75,6 +74,6 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
