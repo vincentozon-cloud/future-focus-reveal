@@ -1,49 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
 }
 
-/* 1. THE V4 ENGINE BRIDGE */
-/* This forces Tailwind to listen to your Next-Themes toggle instead of the OS */
+/* THE V4 ENGINE BRIDGE */
 @variant dark (&:is(.dark *));
 
-/* 2. LIGHT MODE VARIABLES */
+/* LIGHT MODE VARIABLES */
 :root {
-  --background: #fdf2f8; /* Soft Sakura base */
+  --background: #fdf2f8;
   --foreground: #171717;
 }
 
-/* 3. DARK MODE VARIABLES */
-/* FIX: Changed from @media to .dark so it listens to your toggle switch! */
+/* DARK MODE VARIABLES */
 .dark {
-  --background: #050505; /* Deep aesthetic base */
+  --background: #050505;
   --foreground: #ededed;
 }
 
+/* TAILWIND CORE OVERRIDE */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Comfortaa', 'Cafe24Danjunghae', sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 500; /* Dropped from 700 to 500 to fix the heavy bolding */
 }
 
 /* CUSTOM SCANNER ANIMATION */
 @keyframes scanMove {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(94px);
-  }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(94px); }
 }
 
 .animate-scanMove {
   animation: scanMove 2s linear infinite alternate;
+}
+
+/* LOCAL KOREAN FONT CODES */
+@font-face {
+  font-family: 'Cafe24Danjunghae';
+  src: url('/fonts/Cafe24Danjunghae-v2.0.woff2') format('woff2'),
+       url('/fonts/Cafe24Danjunghae-v2.0.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
