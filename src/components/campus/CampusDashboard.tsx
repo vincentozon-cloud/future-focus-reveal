@@ -34,46 +34,55 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
 
       {/* REFINED ACADEMIC HEADER */}
-      <header className="px-6 pt-32 pb-12 text-center max-w-5xl mx-auto relative z-10">
+      <header className="px-4 pt-32 pb-12 w-full max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          className="flex flex-col items-center"
         >
-          {/* RIGHT SIDE BADGE */}
-          <div className="inline-block mb-6 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
+          {/* TOP BADGE */}
+          <div className="inline-block mb-8 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
             {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
           </div>
 
-          <h2 className="text-emerald-700 dark:text-yellow-400 text-xs md:text-sm font-bold uppercase tracking-[0.6em] mb-4 drop-shadow-sm transition-colors">
-            {lang === 'ko' ? '공식 포털에 오신 것을 환영합니다' : 'Welcome to the Official Portal'}
-          </h2>
-          
-          <h1 className="text-slate-900 dark:text-white text-4xl md:text-6xl font-light tracking-tight leading-tight transition-colors" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-            <span className="font-black block mb-2 tracking-tighter uppercase">
-              {lang === 'ko' ? '퓨처 포커스' : 'Future Focus'}
-            </span>
-            <span className="text-2xl md:text-3xl font-serif italic text-slate-600 dark:text-white/80 block border-t border-slate-300 dark:border-white/10 pt-4 mt-4 max-w-2xl mx-auto transition-colors">
-              {lang === 'ko' ? '언어 및 교육 기관' : 'Language and Training Institute'}
-            </span>
-          </h1>
-
-          {/* ELEGANT DIVIDER */}
-          <div className="flex items-center justify-center gap-4 mt-8 opacity-50 dark:opacity-30">
-            <div className="h-px w-12 bg-slate-400 dark:bg-white transition-colors" />
-            <div className="w-2 h-2 rounded-full border border-slate-400 dark:border-white rotate-45 transition-colors" />
-            <div className="h-px w-12 bg-slate-400 dark:bg-white transition-colors" />
-          </div>
-
-          {/* REFINED NEWS BULLETIN */}
-          <div className="mt-10 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-full px-6 py-2 inline-flex items-center gap-3 shadow-lg dark:shadow-none transition-colors">
-            <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute h-full w-full rounded-full bg-green-500 dark:bg-green-400 opacity-75"></span>
-              <span className="relative rounded-full h-2 w-2 bg-green-600 dark:bg-green-500"></span>
+          {/* 3-COLUMN FLEX LAYOUT FOR LOGOS & BRAND TEXT */}
+          <div className="w-full flex items-center justify-between gap-2 md:gap-8">
+            
+            {/* Left: Future Focus Logo */}
+            <div className="shrink-0">
+              <img 
+                src="/FutureFocus_Logo.png" 
+                alt="Future Focus Official Logo" 
+                className="w-16 sm:w-20 md:w-32 h-auto object-contain drop-shadow-md"
+              />
             </div>
-            <p className="text-[10px] text-slate-700 dark:text-white/70 font-bold uppercase tracking-widest transition-colors">
-              {lang === 'ko' ? '학사 공지: 한국어 수업 레벨 1 월요일 시작' : 'Academic Notice: Korean Class Level 1 starts Monday'}
-            </p>
+
+            {/* Center: Official Typography */}
+            <div className="flex-1 text-center">
+              <h1 className="text-emerald-900 dark:text-emerald-400 text-[11px] sm:text-sm md:text-2xl font-black uppercase tracking-widest leading-tight drop-shadow-sm transition-colors" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                {lang === 'ko' ? '퓨처 포커스 언어 및 교육 기관' : (
+                  <>Future Focus Language And <br className="hidden md:block" /> Training Institute, Inc.</>
+                )}
+              </h1>
+              
+              <div className="w-12 h-[2px] bg-emerald-500/30 mx-auto my-3 md:my-4 rounded-full transition-colors"></div>
+
+              <p className="text-[6px] sm:text-[8px] md:text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed transition-colors">
+                Unit 301, 3rd Floor & Antonio Bldg., Prime St. <br />
+                Brgy. Ayala Alabang, Muntinlupa City, Metro Manila
+              </p>
+            </div>
+
+            {/* Right: Cami Teaches Korean Logo */}
+            <div className="shrink-0">
+              <img 
+                src="/CamiTeachesKorean_Logo.png" 
+                alt="Cami Teaches Korean Logo" 
+                className="w-16 sm:w-20 md:w-32 h-auto object-contain drop-shadow-md"
+              />
+            </div>
+
           </div>
         </motion.div>
       </header>

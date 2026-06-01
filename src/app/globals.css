@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
-/* Tailwind v4 now uses the 'dark' class automatically if you define it */
-@layer base {
-  :root {
-    /* Define your light mode variables here if needed */
-  }
-  
-  .dark {
-    /* This empty class is the bridge for next-themes */
-  }
+/* 1. THE V4 ENGINE BRIDGE */
+/* This forces Tailwind to listen to your Next-Themes toggle instead of the OS */
+@variant dark (&:is(.dark *));
+
+/* 2. LIGHT MODE VARIABLES */
+:root {
+  --background: #fdf2f8; /* Soft Sakura base */
+  --foreground: #171717;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 3. DARK MODE VARIABLES */
+/* FIX: Changed from @media to .dark so it listens to your toggle switch! */
+.dark {
+  --background: #050505; /* Deep aesthetic base */
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -21,13 +22,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
