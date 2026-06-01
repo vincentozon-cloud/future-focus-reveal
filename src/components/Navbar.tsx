@@ -16,10 +16,10 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Programs", href: "/programs" },
+    { name: "About", href: "/#about" },
+    { name: "Programs", href: "/#programs" },
     { name: "Mock Tests", href: "/mock-tests" },
-    { name: "Contacts", href: "/contacts" },
+    { name: "Contacts", href: "/#contacts" },
   ];
 
   useEffect(() => {

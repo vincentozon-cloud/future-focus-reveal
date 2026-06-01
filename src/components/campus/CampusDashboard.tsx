@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CourseGrid } from './CourseGrid';
-import { EnrollmentTools } from './EnrollmentTools';
 
 const images = [
   '/gallery1.jpg', 
@@ -28,66 +27,9 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen relative overflow-hidden bg-transparent"
+      className="relative w-full bg-transparent"
     >
-      {/* Background Textures */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]" style={{ filter: 'contrast(150%) brightness(80%)' }} />
-
-      {/* REFINED ACADEMIC HEADER */}
-      <header className="px-4 pt-32 pb-12 w-full max-w-6xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="flex flex-col items-center"
-        >
-          {/* TOP BADGE */}
-          <div className="inline-block mb-8 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
-            {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
-          </div>
-
-          {/* 3-COLUMN FLEX LAYOUT FOR LOGOS & BRAND TEXT */}
-          <div className="w-full flex items-center justify-between gap-2 md:gap-8">
-            
-            {/* Left: Future Focus Logo */}
-            <div className="shrink-0">
-              <img 
-                src="/FutureFocus_Logo.png" 
-                alt="Future Focus Official Logo" 
-                className="w-16 sm:w-20 md:w-32 h-auto object-contain drop-shadow-md"
-              />
-            </div>
-
-            {/* Center: Official Typography */}
-            <div className="flex-1 text-center">
-              <h1 className="text-emerald-900 dark:text-emerald-400 text-[11px] sm:text-sm md:text-2xl font-black uppercase tracking-widest leading-tight drop-shadow-sm transition-colors" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-                {lang === 'ko' ? '퓨처 포커스 언어 및 교육 기관' : (
-                  <>Future Focus Language And <br className="hidden md:block" /> Training Institute, Inc.</>
-                )}
-              </h1>
-              
-              <div className="w-12 h-[2px] bg-emerald-500/30 mx-auto my-3 md:my-4 rounded-full transition-colors"></div>
-
-              <p className="text-[6px] sm:text-[8px] md:text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed transition-colors">
-                Unit 301, 3rd Floor & Antonio Bldg., Prime St. <br />
-                Brgy. Ayala Alabang, Muntinlupa City, Metro Manila
-              </p>
-            </div>
-
-            {/* Right: Cami Teaches Korean Logo */}
-            <div className="shrink-0">
-              <img 
-                src="/CamiTeachesKorean_Logo.png" 
-                alt="Cami Teaches Korean Logo" 
-                className="w-16 sm:w-20 md:w-32 h-auto object-contain drop-shadow-md"
-              />
-            </div>
-
-          </div>
-        </motion.div>
-      </header>
-
-      <div className="relative z-10">
+      <div className="relative z-10 pt-4">
         <CourseGrid onEnroll={onEnroll} lang={lang} />
 
         {/* GALLERY SECTION */}
@@ -131,56 +73,8 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
               <button key={i} onClick={() => setIndex(i)} className={`h-1 rounded-full transition-all duration-500 ${i === index ? 'w-12 bg-yellow-400' : 'w-3 bg-slate-300 dark:bg-white/20'}`} />
             ))}
           </div>
-
-          {/* SOCIAL SECTION */}
-          <div className="mt-20 mb-12 text-center relative z-20">
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2 transition-colors">
-                {lang === 'ko' ? '함께하세요' : 'Stay Connected'}
-              </h2>
-              <h3 className="text-slate-900 dark:text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter transition-colors" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                {lang === 'ko' ? '팔로우 하기' : 'Follow us on'}<span className="text-pink-500">:</span>
-              </h3>
-              <div className="h-1 w-12 bg-yellow-400 mx-auto mt-4 rounded-full" />
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center gap-6 mt-10">
-              {[
-                { id: 'fb', full: 'Facebook', color: '#1877F2', link: 'https://www.facebook.com/camiteacheskorean', svg: <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z"/> },
-                { id: 'yt', full: 'YouTube', color: '#FF0000', link: 'https://www.youtube.com/@CamiTeachesKorean', svg: <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505a3.017 3.017 0 0 0-2.122 2.136C0 8.055 0 12 0 12s0 3.945.501 5.814a3.017 3.017 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.945 24 12 24 12s0-3.945-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/> },
-                { id: 'tk', full: 'TikTok', color: '#000000', link: 'https://www.tiktok.com/@camiteacheskorean', svg: <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96a6.66 6.66 0 0 1 4.44-1.56c.05 1.63.02 3.26.02 4.88-.06-.01-.11-.01-.17-.01-1.51-.03-3.2.74-3.9 2.03-.8 1.41-.61 3.3.44 4.58.77.96 2 1.43 3.2 1.3 1.34-.04 2.6-.82 3.22-2 .41-.75.54-1.62.53-2.48.01-4.67 0-9.33.01-14.01z"/> }
-              ].map((social) => (
-                <motion.a
-                  key={social.id}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex items-center bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-2xl p-2 pr-6 transition-all duration-300 shadow-xl overflow-hidden"
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.4)' }}
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-360" style={{ color: social.color }}>
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 filter drop-shadow-md">
-                      {social.svg}
-                    </svg>
-                  </div>
-                  <span className="ml-3 text-slate-800 dark:text-white font-sans font-black uppercase tracking-tighter text-lg italic transition-all duration-300 group-hover:text-yellow-500 dark:group-hover:text-yellow-400">
-                    {social.full}
-                  </span>
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full" style={{ backgroundColor: social.color }} />
-                </motion.a>
-              ))}
-            </div>
-          </div>
         </div>
-
-        <EnrollmentTools />
       </div>
-
-      <footer className="py-20 text-center relative z-10">
-        <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-widest transition-colors">
-          Powered by <div className="w-px h-4 bg-slate-300 dark:bg-white/20" /> eMVeOzHub
-        </div>
-      </footer>
     </motion.div>
   );
 }

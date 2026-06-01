@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* 1. THE V4 ENGINE BRIDGE */
 /* This forces Tailwind to listen to your Next-Themes toggle instead of the OS */
 @variant dark (&:is(.dark *));
