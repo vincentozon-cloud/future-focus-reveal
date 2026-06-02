@@ -47,10 +47,16 @@ export function EnrollmentTools() {
               <span>Base Tuition</span>
               <span>₱{activeCourse.fee.toLocaleString()}.00</span>
             </div>
-            <div className="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-widest">
+            
+            <div className="flex justify-between items-start text-slate-400 text-xs font-bold uppercase tracking-widest">
               <span>Inclusions</span>
-              <span className="text-right text-[10px] leading-tight">ID, Lanyard,<br/>Books, T-shirt</span>
+              <span className="text-right text-[10px] leading-tight">
+                Softcopy of EPS-TOPIK <br/>
+                Book 1 & 2, Unlimited <br/>
+                Sit-in, Class Recording
+              </span>
             </div>
+
             <div className="w-full h-px bg-slate-700/50 my-2"></div>
             <div className="flex justify-between items-center text-white text-lg font-black uppercase tracking-tighter">
               <span>Total Estimated</span>
