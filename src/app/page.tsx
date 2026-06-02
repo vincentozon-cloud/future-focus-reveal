@@ -27,7 +27,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden font-sans text-slate-900 dark:text-white transition-colors duration-1000 bg-gradient-to-br from-pink-100 via-white to-emerald-100 dark:from-pink-950 dark:via-[#0a0a0a] dark:to-emerald-950">
+    <main className="min-h-screen font-sans text-slate-900 dark:text-white transition-colors duration-1000 bg-linear-to-br from-pink-100 via-white to-emerald-100 dark:from-pink-950 dark:via-[#0a0a0a] dark:to-emerald-950">
       
       {/* ========================================= */}
       {/* BACKGROUND TEXTURE & FADED LOGO OVERLAY */}
@@ -114,7 +114,7 @@ export default function Home() {
                       <>Future Focus Language And <br className="hidden md:block" /> Training Institute, Inc.</>
                     )}
                   </h1>
-                  <div className="w-12 h-[2px] bg-emerald-500/30 mx-auto my-3 md:my-4 rounded-full transition-colors"></div>
+                  <div className="w-12 h-0.5 bg-emerald-500/30 mx-auto my-3 md:my-4 rounded-full transition-colors"></div>
                   <p className="text-[6px] sm:text-[8px] md:text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed transition-colors">
                     Unit 301, 3rd Floor & Antonio Bldg., Prime St. <br />
                     Brgy. Ayala Alabang, Muntinlupa City, Metro Manila
