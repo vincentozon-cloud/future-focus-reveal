@@ -96,10 +96,11 @@ export default function Home() {
         onClick={() => isLoginOpen && setIsLoginOpen(false)}
       >
         {/* Section 1: Dashboard View */}
-        <section id="home" className="min-h-screen pt-4 md:pt-12">
-          
+        {/* Section 1: Dashboard View */}
+        <section id="home" className="min-h-screen pt-24 md:pt-28">
           <header className="px-4 pb-12 w-full max-w-6xl mx-auto relative z-10">
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="flex flex-col items-center">
+            {/* REPLACED motion.div with a standard div to fix hydration/visibility bug */}
+            <div className="flex flex-col items-center opacity-100">
               <div className="inline-block mb-8 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
                 {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
               </div>
@@ -124,7 +125,7 @@ export default function Home() {
                   <img src="/CamiTeachesKorean_Logo.png" alt="Cami Teaches Korean Logo" className="w-16 sm:w-20 md:w-32 h-auto object-contain drop-shadow-md" />
                 </div>
               </div>
-            </motion.div>
+            </div>
           </header>
 
           <CampusDashboard onEnroll={handleEnroll} lang={lang} />
