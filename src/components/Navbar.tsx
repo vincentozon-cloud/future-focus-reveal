@@ -15,21 +15,20 @@ export default function Navbar() {
     setMounted(true);
   }, []);
 
-  // Determine the theme safely without returning null and deleting the navbar
   const currentTheme = mounted ? theme : 'dark';
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-[9999] bg-white/90 dark:bg-black/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-sm transition-colors duration-300">
+    <nav className="fixed top-0 left-0 w-full z-9999 bg-white/90 dark:bg-black/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
+        <div className="flex justify-between h-20 items-center gap-2">
           
-          <div className="shrink-0 flex items-center">
-            <Link href="/" className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tighter uppercase italic">
+          <div className="flex items-center min-w-0">
+            <Link href="/" className="text-[10px] sm:text-xs md:text-xl font-extrabold text-gray-900 dark:text-white tracking-tighter uppercase italic truncate">
               Future Focus <span className="text-pink-600 dark:text-pink-400">Language Institute</span>
             </Link>
           </div>
 
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden md:flex md:items-center md:space-x-8 shrink-0">
             <Link href="/" className={`inline-flex items-center px-1 pt-1 text-xs font-black uppercase tracking-widest transition-all ${pathname === '/' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>Home</Link>
             <Link href="/#about" className="inline-flex items-center px-1 pt-1 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all">About</Link>
             <Link href="/#programs" className="inline-flex items-center px-1 pt-1 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all">Programs</Link>
@@ -41,7 +40,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex items-center md:hidden space-x-2">
+          <div className="flex items-center md:hidden space-x-2 shrink-0">
             <button onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} className="p-3 rounded-full bg-gray-100 dark:bg-white/10">
                {currentTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
