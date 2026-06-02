@@ -17,13 +17,23 @@ export default function Home() {
 
   const t = (key: string) => translations[lang][key] || key;
 
-  const handleEnroll = async (courseName: string) => {
-    const { error } = await supabase
-      .from('enrollment')
-      .insert([{ full_name: 'Interested Student', course_interest: courseName, source: 'google_seo' }]);
+  const handleEnroll = (courseName: string) => {
+    // 1. Format the message based on their language toggle
+    const message = lang === 'ko' 
+      ? `안녕하세요! ${courseName} 프로그램에 등록하고 싶습니다.` 
+      : `Hi! I want to enroll in the ${courseName} program.`;
+      
+    // 2. Silently copy it to their clipboard (Fail-safe for FB Messenger limits)
+    navigator.clipboard.writeText(message).catch(() => console.log('Clipboard access denied by browser'));
+    
+    // 3. Quick alert so they know what to do
+    alert(lang === 'ko' 
+      ? `메시지가 복사되었습니다! 메신저 채팅창에 붙여넣기 해주세요.` 
+      : `Message copied! Just paste it into the Messenger chat.`
+    );
 
-    if (error) console.error('Error:', error.message);
-    else alert(lang === 'ko' ? `${courseName}에 대한 관심이 등록되었습니다!` : `Interest registered for ${courseName}!`);
+    // 4. Fire open the official Cami Teaches Korean messenger in a new tab
+    window.open('https://m.me/camiteacheskorean', '_blank');
   };
 
   return (
@@ -143,19 +153,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 3: Programs View */}
-        <section id="programs" className="min-h-screen flex items-center justify-center border-t border-slate-300/30 dark:border-white/10 backdrop-blur-sm pb-24">
-          <div className="max-w-4xl mx-auto p-8 text-center bg-white/30 dark:bg-black/30 rounded-3xl backdrop-blur-md shadow-xl border border-white/40 dark:border-white/10">
-            <h2 className="text-5xl font-black uppercase tracking-tighter mb-6">{t('programs_title') || 'Our Programs'}</h2>
-            <div className="w-16 h-1 bg-emerald-500 mx-auto mb-8 rounded-full"></div>
-            <p className="text-lg opacity-80 leading-relaxed font-bold tracking-widest text-slate-500 dark:text-slate-400">
-              현재 콘텐츠를 준비 중입니다.<br />
-            <span className="text-xs uppercase tracking-[0.3em]">( Coming Soon )</span>
-            </p>
-          </div>
-        </section>
-
-        {/* ========================================= */}
+               {/* ========================================= */}
         {/* NEW SECTION: CONTACTS, MAP & CALCULATOR   */}
         {/* ========================================= */}
         <section id="contacts" className="min-h-screen flex flex-col items-center justify-center border-t border-slate-300/30 dark:border-white/10 backdrop-blur-sm pt-24 pb-32">
@@ -209,16 +207,22 @@ export default function Home() {
 
       </div>
       
-      {/* FLOATING NEWS BULLETIN */}
+      {/* FLOATING INSPIRATION BANNER */}
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-40 pointer-events-none">
-        <div className="bg-white/80 dark:bg-black/60 backdrop-blur-xl border border-slate-200 dark:border-white/20 rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-slate-900 dark:text-white transition-colors duration-500 pointer-events-auto">
-          <div className="relative flex h-3 w-3 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 dark:bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-600 dark:bg-green-500"></span>
+        <div className="bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-pink-200 dark:border-pink-900/50 rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-slate-900 dark:text-white transition-colors duration-500 pointer-events-auto">
+          <div className="relative flex h-8 w-8 shrink-0 items-center justify-center bg-pink-100 dark:bg-pink-900/30 rounded-full">
+            <span className="text-xl">✨</span>
           </div>
           <div className="flex-1">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-pink-600 dark:text-pink-400 font-bold">{t('bulletin_title')}</p>
-            <p className="text-sm font-semibold">{t('bulletin_text')}</p>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-pink-500 dark:text-pink-400 font-black mb-1">
+              Daily Inspiration
+            </p>
+            <p className="text-sm font-black text-slate-800 dark:text-white tracking-tight">
+              한국어와 함께 당신의 꿈을 펼치세요!
+            </p>
+            <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mt-0.5 uppercase tracking-wide">
+              Pursue your dreams. A new language opens a new world.
+            </p>
           </div>
         </div>
       </div>
