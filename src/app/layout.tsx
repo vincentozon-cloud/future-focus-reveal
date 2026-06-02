@@ -14,6 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = { width: 'device-width', initialScale: 1 }
+
 export const metadata: Metadata = {
   title: 'Future Focus Language Training Center | Cami teaches Korean | Top Korean Language School & EPS-TOPIK Training',
   description: 'Enroll at Future Focus, the leading Korean Language Center. Specialized EPS-TOPIK review, Hangul for beginners, and work-in-Korea preparation.',
