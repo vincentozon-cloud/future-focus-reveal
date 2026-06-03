@@ -21,19 +21,19 @@ export function EnrollmentTools() {
     <section className="py-12 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 relative z-10">
       
       {/* LEFT: Tuition Calculator */}
-      <div className="bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-8 rounded-3xl shadow-xl flex flex-col justify-center transition-colors duration-500">
-        <h3 className="text-2xl font-black uppercase italic tracking-tighter text-slate-900 dark:text-white mb-6">
+      <div className="bg-white/60 dark:bg-white/5 backdrop-blur-xl transform-gpu border border-slate-200 dark:border-white/10 p-8 rounded-3xl shadow-xl flex flex-col justify-center transition-colors duration-500">
+        <h3 className="text-2xl font-black uppercase italic tracking-tighter text-slate-900 dark:text-white mb-6 select-none">
           Tuition <span className="text-pink-600 dark:text-pink-400">Calculator</span>
         </h3>
 
         <div className="space-y-6">
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Select 3rd Semester Program</label>
+            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 select-none">Select 3rd Semester Program</label>
             <div className="relative">
               <select
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
-                className="cursor-pointer touch-manipulation relative z-50 w-full bg-slate-100 dark:bg-black/50 border border-slate-300 dark:border-white/20 rounded-xl p-4 text-sm font-bold text-slate-800 dark:text-white outline-none focus:border-pink-500 transition-colors appearance-none"
+                className="cursor-pointer touch-manipulation relative z-50 w-full bg-slate-100 dark:bg-black/50 border border-slate-300 dark:border-white/20 rounded-xl p-4 text-sm font-bold text-slate-800 dark:text-white outline-none focus:border-pink-500 transition-colors appearance-none select-none"
               >
                 {courses.map(course => (
                   <option key={course.id} value={course.id}>{course.name}</option>
@@ -49,20 +49,20 @@ export function EnrollmentTools() {
           <div className="flex bg-slate-200 dark:bg-black/40 p-1 rounded-xl">
             <button
               onClick={() => setPaymentMode('weekly')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none active:scale-95 ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Weekly Plan
             </button>
             <button
               onClick={() => setPaymentMode('full')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none active:scale-95 ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Full Payment
             </button>
           </div>
 
           {/* Dynamic Calculation Output */}
-          <div className="p-6 bg-slate-900 dark:bg-black/80 rounded-2xl border border-slate-800 dark:border-white/10 flex flex-col gap-4 transition-all duration-300">
+          <div className="p-6 bg-slate-900 dark:bg-black/80 rounded-2xl border border-slate-800 dark:border-white/10 flex flex-col gap-4 transition-all duration-300 pointer-events-none select-none">
             <div className="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-widest">
               <span>Total Tuition</span>
               <span className={paymentMode === 'full' ? 'text-white' : ''}>₱{activeCourse.fee.toLocaleString()}.00</span>
@@ -106,7 +106,7 @@ export function EnrollmentTools() {
 
       {/* RIGHT: MAP & DIRECTIONS (Untouched) */}
       <div className="space-y-6">
-        <div className="bg-slate-200 h-80 rounded-4xl overflow-hidden shadow-2xl relative border-4 border-white">
+        <div className="bg-slate-200 h-80 rounded-4xl overflow-hidden shadow-2xl relative border-4 border-white transform-gpu">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.0733856149814!2d121.03157597584447!3d14.451792480084321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d02008f1b62f%3A0x6b499839c063167!2sAntonio%20Center!5e0!3m2!1sen!2sph!4v1707240000000!5m2!1sen!2sph"
             className="w-full h-full border-0"
@@ -128,7 +128,7 @@ export function EnrollmentTools() {
             href="https://maps.app.goo.gl/pW8vT5uD2i4CgYVz9" 
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center"
+            className="cursor-pointer touch-manipulation relative z-50 bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center select-none active:scale-95"
           >
             Open Maps
           </a>

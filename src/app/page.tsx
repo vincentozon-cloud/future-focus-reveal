@@ -39,9 +39,9 @@ export default function Home() {
   return (
     <main className="min-h-screen font-sans text-slate-900 dark:text-white transition-colors duration-1000 bg-linear-to-br from-pink-100 via-white to-emerald-100 dark:from-pink-950 dark:via-[#0a0a0a] dark:to-emerald-950">
       
-      {/* ========================================= */}
+     
       {/* BACKGROUND TEXTURE & FADED LOGO OVERLAY */}
-      {/* ========================================= */}
+   
       <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
         <img 
@@ -105,7 +105,7 @@ export default function Home() {
         className={`relative z-10 transition-all duration-1000 ${isLoginOpen ? 'md:ml-100 blur-md md:blur-none' : 'ml-0'}`}
         onClick={() => isLoginOpen && setIsLoginOpen(false)}
       >
-        {/* Section 1: Dashboard View */}
+        
         {/* Section 1: Dashboard View */}
         <section id="home" className="min-h-screen pt-24 md:pt-28">
           <header className="px-4 pb-12 w-full max-w-6xl mx-auto relative z-10">
@@ -153,13 +153,12 @@ export default function Home() {
           </div>
         </section>
 
-               {/* ========================================= */}
         {/* NEW SECTION: CONTACTS, MAP & CALCULATOR   */}
-        {/* ========================================= */}
+        
         <section id="contacts" className="min-h-screen flex flex-col items-center justify-center border-t border-slate-300/30 dark:border-white/10 backdrop-blur-sm pt-24 pb-32">
           <div className="max-w-6xl mx-auto w-full px-4">
             
-            {/* SOCIAL SECTION MERGED HERE */}
+            {/* SOCIAL SECTION MERGED */}
             <div className="mb-20 text-center relative z-20">
               <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2 transition-colors">
@@ -199,7 +198,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ENROLLMENT TOOLS (CALCULATOR & MAP) MERGED HERE */}
+            {/* ENROLLMENT TOOLS (CALCULATOR & MAP) MERGED*/}
             <EnrollmentTools />
 
           </div>
@@ -227,7 +226,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* FOOTER MERGED HERE */}
+      {/* FOOTER MERGED */}
       <footer className="py-12 text-center relative z-10 w-full border-t border-slate-300/30 dark:border-white/10">
         <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-widest transition-colors">
           Powered by <div className="w-px h-4 bg-slate-300 dark:bg-white/20" /> eMVeOzHub

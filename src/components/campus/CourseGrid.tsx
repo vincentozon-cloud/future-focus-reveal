@@ -69,14 +69,12 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-scroll logic (4 seconds per slide)
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
       if (scrollRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        // If reached the end, snap back to start. Otherwise, scroll right.
         if (scrollLeft + clientWidth >= scrollWidth - 10) {
           scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
@@ -108,24 +106,22 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
           </p>
         </div>
         
-        {/* Desktop Navigation Buttons */}
         <div className="hidden md:flex gap-2">
           <button 
             onClick={() => scroll('left')}
-            className="p-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-white hover:bg-pink-500 hover:text-white transition-all active:scale-95"
+            className="cursor-pointer touch-manipulation relative z-50 select-none p-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-white hover:bg-pink-500 hover:text-white transition-all active:scale-95"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+            <svg className="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
           </button>
           <button 
             onClick={() => scroll('right')}
-            className="p-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-white hover:bg-yellow-400 hover:text-[#1B4332] transition-all active:scale-95"
+            className="cursor-pointer touch-manipulation relative z-50 select-none p-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-white hover:bg-yellow-400 hover:text-[#1B4332] transition-all active:scale-95"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            <svg className="w-5 h-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
           </button>
         </div>
       </div>
 
-      {/* Interactive Wrapper: Pauses auto-scroll on hover or touch */}
       <div 
         className="relative group"
         onMouseEnter={() => setIsPaused(true)}
@@ -133,7 +129,6 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
-        {/* Horizontal Scroll Snap Container */}
         <div 
           ref={scrollRef}
           className="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory hide-scrollbar" 
@@ -172,7 +167,7 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
                 <span className="text-lg font-black text-white tracking-tighter">{course.fee}</span>
                 <button 
                   onClick={() => onEnroll(course.title)}
-                  className="cursor-pointer touch-manipulation relative z-50 px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-yellow-400 hover:text-[#1B4332] transition-colors active:scale-95"
+                  className="cursor-pointer touch-manipulation relative z-50 select-none px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-yellow-400 hover:text-[#1B4332] transition-colors active:scale-95"
                 >
                   {lang === 'ko' ? '등록하기' : 'Enroll Now'}
                 </button>
@@ -180,7 +175,6 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
             </div>
           ))}
           
-          {/* Mystery Class Teaser Card */}
           <div className="min-w-70 md:min-w-[320px] snap-center shrink-0 rounded-3xl p-6 border border-dashed border-slate-400 dark:border-white/20 bg-slate-100 dark:bg-white/5 flex flex-col items-center justify-center text-center">
             <span className="text-4xl mb-4">🤫</span>
             <h3 className="text-lg font-black text-slate-800 dark:text-white uppercase tracking-tighter mb-2">Secret Program</h3>
