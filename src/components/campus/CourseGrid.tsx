@@ -167,7 +167,7 @@ export function CourseGrid({ onEnroll, lang }: { onEnroll: (course: string) => v
                 <span className="text-lg font-black text-white tracking-tighter">{course.fee}</span>
                 <button 
                   onClick={() => onEnroll(course.title)}
-                  className="cursor-pointer touch-manipulation relative z-50 select-none px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-yellow-400 hover:text-[#1B4332] transition-colors active:scale-95"
+                  className="cursor-pointer touch-manipulation relative z-50 select-none px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-yellow-400 hover:text-[#1B4332] transition-colors"
                 >
                   {lang === 'ko' ? '등록하기' : 'Enroll Now'}
                 </button>

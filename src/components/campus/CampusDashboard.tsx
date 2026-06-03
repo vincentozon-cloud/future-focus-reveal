@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { CourseGrid } from './CourseGrid';
 
 const images = [
@@ -34,25 +33,21 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
     <div className="relative w-full bg-transparent">
       <div className="relative z-10 pt-4">
         
-        {/* THIS IS YOUR DASHBOARD CONTENT */}
         <CourseGrid onEnroll={onEnroll} lang={lang} />
 
-        {/* GALLERY SECTION - Tightened width from 6xl to 3xl */}
         <div className="max-w-3xl mx-auto px-4 my-16 group">
           <div className="bg-white/60 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-3xl p-1 overflow-hidden shadow-2xl transition-colors transform-gpu">
-            {/* Height increased to 750px on desktop to make images much larger */}
             <div className="relative h-[500px] md:h-[750px] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-black/40 transition-colors">
-              <AnimatePresence mode="wait">
-                <motion.img 
-                  key={index} 
-                  src={images[index]} 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  exit={{ opacity: 0 }} 
-                  transition={{ duration: 1.2 }} 
-                  className="absolute inset-0 w-full h-full object-contain p-2 transform-gpu z-10" 
+              
+              {/* I completely removed Framer Motion here and replaced it with native Tailwind CSS opacity transitions to bypass iOS rendering bugs */}
+              {images.map((src, i) => (
+                <img 
+                  key={i} 
+                  src={src} 
+                  className={`absolute inset-0 w-full h-full object-contain p-2 transform-gpu transition-opacity duration-1000 ease-in-out ${i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} 
+                  alt="Gallery content"
                 />
-              </AnimatePresence>
+              ))}
 
               {/* NAVIGATION ARROWS */}
               <button onClick={prev} className="cursor-pointer touch-manipulation select-none absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-[60] group/btn">
@@ -73,7 +68,6 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
             </div>
           </div>
           
-          {/* DOTS */}
           <div className="flex justify-center gap-3 mt-6 relative z-50">
             {images.map((_, i) => (
               <button 

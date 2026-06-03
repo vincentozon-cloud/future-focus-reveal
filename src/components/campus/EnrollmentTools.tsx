@@ -49,13 +49,13 @@ export function EnrollmentTools() {
           <div className="flex bg-slate-200 dark:bg-black/40 p-1 rounded-xl">
             <button
               onClick={() => setPaymentMode('weekly')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none active:scale-95 ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Weekly Plan
             </button>
             <button
               onClick={() => setPaymentMode('full')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none active:scale-95 ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Full Payment
             </button>
