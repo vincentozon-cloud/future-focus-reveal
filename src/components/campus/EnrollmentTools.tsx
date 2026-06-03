@@ -33,7 +33,7 @@ export function EnrollmentTools() {
               <select
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-black/50 border border-slate-300 dark:border-white/20 rounded-xl p-4 text-sm font-bold text-slate-800 dark:text-white outline-none focus:border-pink-500 transition-colors cursor-pointer appearance-none"
+                className="cursor-pointer touch-manipulation relative z-50 w-full bg-slate-100 dark:bg-black/50 border border-slate-300 dark:border-white/20 rounded-xl p-4 text-sm font-bold text-slate-800 dark:text-white outline-none focus:border-pink-500 transition-colors appearance-none"
               >
                 {courses.map(course => (
                   <option key={course.id} value={course.id}>{course.name}</option>
@@ -49,13 +49,13 @@ export function EnrollmentTools() {
           <div className="flex bg-slate-200 dark:bg-black/40 p-1 rounded-xl">
             <button
               onClick={() => setPaymentMode('weekly')}
-              className={`flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Weekly Plan
             </button>
             <button
               onClick={() => setPaymentMode('full')}
-              className={`flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
             >
               Full Payment
             </button>
@@ -106,7 +106,7 @@ export function EnrollmentTools() {
 
       {/* RIGHT: MAP & DIRECTIONS (Untouched) */}
       <div className="space-y-6">
-        <div className="bg-slate-200 h-80 rounded-[2rem] overflow-hidden shadow-2xl relative border-4 border-white">
+        <div className="bg-slate-200 h-80 rounded-4xl overflow-hidden shadow-2xl relative border-4 border-white">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.0733856149814!2d121.03157597584447!3d14.451792480084321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d02008f1b62f%3A0x6b499839c063167!2sAntonio%20Center!5e0!3m2!1sen!2sph!4v1707240000000!5m2!1sen!2sph"
             className="w-full h-full border-0"
@@ -116,7 +116,7 @@ export function EnrollmentTools() {
           ></iframe>
         </div>
         
-        <div className="p-6 bg-white rounded-[2rem] shadow-xl border border-slate-100 flex items-center justify-between">
+        <div className="p-6 bg-white rounded-4xl shadow-xl border border-slate-100 flex items-center justify-between">
           <div>
             <h4 className="font-black text-slate-900 uppercase italic tracking-tighter">Visit Our Campus</h4>
             <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-tight">

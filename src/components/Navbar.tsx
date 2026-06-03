@@ -35,16 +35,16 @@ export default function Navbar() {
             <Link href="/mock-tests" className={`inline-flex items-center px-1 pt-1 text-xs font-black uppercase tracking-widest transition-all ${pathname === '/mock-tests' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>Mock Tests</Link>
             <Link href="/#contacts" className="inline-flex items-center px-1 pt-1 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all">Contacts</Link>
 
-            <button onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} className="p-3 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
+            <button onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} className="cursor-pointer touch-manipulation relative z-50 p-3 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
               {currentTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
           </div>
 
           <div className="flex items-center md:hidden space-x-2 shrink-0">
-            <button onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} className="p-3 rounded-full bg-gray-100 dark:bg-white/10">
-               {currentTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            <button onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} className="cursor-pointer touch-manipulation relative z-50 p-3 rounded-full bg-gray-100 dark:bg-white/10">
+              {currentTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="p-3 rounded-md text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+            <button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer touch-manipulation relative z-50 p-3 rounded-md text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
               {isOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
