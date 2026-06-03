@@ -72,3 +72,9 @@ html, body {
   backdrop-filter: blur(24px);
   pointer-events: auto; /* Ensure the blur itself doesn't eat taps */
 }
+
+@media (hover: hover) {
+  .btn:hover {
+    /* Only apply hover effects on devices that actually support hover (mouse) */
+  }
+}

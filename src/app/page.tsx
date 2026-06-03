@@ -1,11 +1,10 @@
 'use client';
 
 import { supabase } from '@/lib/supabase';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import CampusDashboard from '@/components/campus/CampusDashboard';
 import { EnrollmentTools } from '@/components/campus/EnrollmentTools';
-import LanguageSelector from '@/components/LanguageSelector'; 
 import en from '@/../public/en.json';
 import ko from '@/../public/ko.json';
 
@@ -15,33 +14,41 @@ export default function Home() {
   const [lang, setLang] = useState('en');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
+  // I built a native event listener bridge here so the Navbar in layout.tsx can command these states
+  useEffect(() => {
+    const handleToggleLang = () => setLang((prev) => (prev === 'en' ? 'ko' : 'en'));
+    const handleToggleLogin = () => setIsLoginOpen((prev) => !prev);
+
+    window.addEventListener('toggleLanguage', handleToggleLang);
+    window.addEventListener('toggleLogin', handleToggleLogin);
+
+    return () => {
+      window.removeEventListener('toggleLanguage', handleToggleLang);
+      window.removeEventListener('toggleLogin', handleToggleLogin);
+    };
+  }, []);
+
   const t = (key: string) => translations[lang][key] || key;
 
   const handleEnroll = (courseName: string) => {
-    // 1. Format the message based on their language toggle
     const message = lang === 'ko' 
       ? `안녕하세요! ${courseName} 프로그램에 등록하고 싶습니다.` 
       : `Hi! I want to enroll in the ${courseName} program.`;
       
-    // 2. Silently copy it to their clipboard (Fail-safe for FB Messenger limits)
     navigator.clipboard.writeText(message).catch(() => console.log('Clipboard access denied by browser'));
     
-    // 3. Quick alert so they know what to do
     alert(lang === 'ko' 
       ? `메시지가 복사되었습니다! 메신저 채팅창에 붙여넣기 해주세요.` 
       : `Message copied! Just paste it into the Messenger chat.`
     );
 
-    // 4. Fire open the official Cami Teaches Korean messenger in a new tab
     window.open('https://m.me/camiteacheskorean', '_blank');
   };
 
   return (
     <main className="min-h-screen font-sans text-slate-900 dark:text-white transition-colors duration-1000 bg-linear-to-br from-pink-100 via-white to-emerald-100 dark:from-pink-950 dark:via-[#0a0a0a] dark:to-emerald-950">
       
-     
       {/* BACKGROUND TEXTURE & FADED LOGO OVERLAY */}
-   
       <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
         <img 
@@ -51,17 +58,7 @@ export default function Home() {
         />
       </div>
 
-      {/* FLOATING ACTION BUTTONS */}
-      {/* FIXED: Shifted down to top-24 so it doesn't overlap the fixed Navbar */}
-      <div className="fixed top-24 right-6 z-50 flex items-center gap-3">
-        <LanguageSelector onLangChange={(l) => setLang(l)} />
-        <button 
-          onClick={() => setIsLoginOpen(!isLoginOpen)}
-          className="p-3 bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-slate-200 dark:border-white/20 rounded-full text-slate-800 dark:text-white hover:bg-pink-500 hover:text-white transition-all shadow-xl"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-        </button>
-      </div>
+      {/* I completely removed the Floating Action Buttons here since they are now in the Navbar */}
 
       {/* LOGIN SIDEBAR */}
       <div className={`fixed left-0 top-0 h-full w-full md:w-100 z-50 transition-transform duration-1000 ease-in-out transform ${isLoginOpen ? 'translate-x-0' : '-translate-x-full'}`}>
@@ -83,13 +80,13 @@ export default function Home() {
             <div className="relative group cursor-pointer">
               <div className="absolute -inset-4 bg-green-500/10 rounded-xl blur-2xl group-hover:bg-green-500/20 transition-all duration-500"></div>
               
-              <button className="relative w-24 h-24 bg-white/60 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden flex items-center justify-center transition-transform active:scale-95">
+              <button onClick={() => setIsLoginOpen(false)} className="relative w-24 h-24 bg-white/60 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden flex items-center justify-center transition-transform active:scale-95">
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `linear-gradient(to right, #4ade80 1px, transparent 1px), linear-gradient(to bottom, #4ade80 1px, transparent 1px)`, backgroundSize: '12px 12px' }} />
                 <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
                   <div className="w-full h-0.5 bg-green-500 dark:bg-green-400 shadow-[0_0_15px_#4ade80] animate-scanMove"></div>
                 </div>
                 <svg className="w-10 h-10 text-green-600/80 dark:text-green-400/80 z-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
                 <div className="absolute bottom-1 w-full text-center">
                   <span className="text-[6px] text-green-700/60 dark:text-green-500/60 font-mono animate-pulse uppercase tracking-tighter">System Ready</span>
@@ -102,14 +99,13 @@ export default function Home() {
 
       {/* MAIN SINGLE-PAGE SCROLL CONTENT */}
       <div 
-        className={`relative z-10 transition-all duration-1000 ${isLoginOpen ? 'md:ml-100 blur-md md:blur-none' : 'ml-0'}`}
+        className={`relative z-10 transition-all duration-1000 ${isLoginOpen ? 'md:ml-100 blur-md md:blur-none pointer-events-none md:pointer-events-auto' : 'ml-0'}`}
         onClick={() => isLoginOpen && setIsLoginOpen(false)}
       >
         
         {/* Section 1: Dashboard View */}
         <section id="home" className="min-h-screen pt-24 md:pt-28">
           <header className="px-4 pb-12 w-full max-w-6xl mx-auto relative z-10">
-            {/* REPLACED motion.div with a standard div to fix hydration/visibility bug */}
             <div className="flex flex-col items-center opacity-100">
               <div className="inline-block mb-8 px-4 py-2 bg-yellow-400 rounded-full text-[#1B4332] text-[10px] font-black uppercase tracking-widest shadow-xl">
                 {lang === 'ko' ? '공식 등록 포털' : 'Official Enrollment Portal'}
@@ -153,12 +149,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* NEW SECTION: CONTACTS, MAP & CALCULATOR   */}
-        
+        {/* Section 3: Contacts, Map & Calculator */}
         <section id="contacts" className="min-h-screen flex flex-col items-center justify-center border-t border-slate-300/30 dark:border-white/10 backdrop-blur-sm pt-24 pb-32">
           <div className="max-w-6xl mx-auto w-full px-4">
             
-            {/* SOCIAL SECTION MERGED */}
             <div className="mb-20 text-center relative z-20">
               <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-2 transition-colors">
@@ -198,7 +192,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ENROLLMENT TOOLS (CALCULATOR & MAP) MERGED*/}
             <EnrollmentTools />
 
           </div>
@@ -206,10 +199,8 @@ export default function Home() {
 
       </div>
       
-      {/* FLOATING INSPIRATION BANNER */}
-      {/* I swapped the left-1/2 translate centering for inset-x-0 mx-auto to bypass iOS Safari's transform hit-box bug */}
-      <div className="fixed bottom-8 inset-x-0 mx-auto w-[90%] max-w-2xl z-40 pointer-events-none flex justify-center">
-        {/* I added transform-gpu and forced w-full to ensure hardware acceleration doesn't drop the pointer-events-auto rule on older iPhones */}
+      {/* I temporarily disabled the Inspiration Banner via block comments to test for iOS overlay bugs */}
+      {/* <div className="fixed bottom-8 inset-x-0 mx-auto w-[90%] max-w-2xl z-40 pointer-events-none flex justify-center">
         <div className="bg-white/90 dark:bg-black/80 backdrop-blur-xl transform-gpu border border-pink-200 dark:border-pink-900/50 rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-slate-900 dark:text-white transition-colors duration-500 pointer-events-auto w-full">
           <div className="relative flex h-8 w-8 shrink-0 items-center justify-center bg-pink-100 dark:bg-pink-900/30 rounded-full">
             <span className="text-xl pointer-events-none">✨</span>
@@ -227,8 +218,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+      */}
 
-      {/* FOOTER MERGED */}
       <footer className="py-12 text-center relative z-10 w-full border-t border-slate-300/30 dark:border-white/10">
         <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/40 text-[10px] font-bold uppercase tracking-widest transition-colors">
           Powered by <div className="w-px h-4 bg-slate-300 dark:bg-white/20" /> eMVeOzHub
