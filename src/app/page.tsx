@@ -207,12 +207,14 @@ export default function Home() {
       </div>
       
       {/* FLOATING INSPIRATION BANNER */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-40 pointer-events-none">
-        <div className="bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-pink-200 dark:border-pink-900/50 rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-slate-900 dark:text-white transition-colors duration-500 pointer-events-auto">
+      {/* I swapped the left-1/2 translate centering for inset-x-0 mx-auto to bypass iOS Safari's transform hit-box bug */}
+      <div className="fixed bottom-8 inset-x-0 mx-auto w-[90%] max-w-2xl z-40 pointer-events-none flex justify-center">
+        {/* I added transform-gpu and forced w-full to ensure hardware acceleration doesn't drop the pointer-events-auto rule on older iPhones */}
+        <div className="bg-white/90 dark:bg-black/80 backdrop-blur-xl transform-gpu border border-pink-200 dark:border-pink-900/50 rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-slate-900 dark:text-white transition-colors duration-500 pointer-events-auto w-full">
           <div className="relative flex h-8 w-8 shrink-0 items-center justify-center bg-pink-100 dark:bg-pink-900/30 rounded-full">
-            <span className="text-xl">✨</span>
+            <span className="text-xl pointer-events-none">✨</span>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 select-none">
             <p className="text-[9px] uppercase tracking-[0.3em] text-pink-500 dark:text-pink-400 font-black mb-1">
               Daily Inspiration
             </p>

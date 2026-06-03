@@ -28,18 +28,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500`}>
-        {/* 2. Wrap everything in the ThemeProvider */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500 min-h-screen flex flex-col`}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange={false}
+      >
+        {/* I wrapped these in a div that explicitly lets pointer events pass through to children */}
+        <div className="flex-grow pointer-events-auto">
           <Navbar />
           {children}
-        </ThemeProvider>
-      </body>
+        </div>
+      </ThemeProvider>
+    </body>
     </html>
   );
 }
