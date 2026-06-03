@@ -58,3 +58,17 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+/* I am forcing Safari to treat the body as a pass-through layer for touches */
+html, body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* I am explicitly telling Safari that these layers must be interactive */
+.backdrop-blur-xl {
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  pointer-events: auto; /* Ensure the blur itself doesn't eat taps */
+}
