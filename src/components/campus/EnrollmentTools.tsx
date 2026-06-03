@@ -49,13 +49,16 @@ export function EnrollmentTools() {
           <div className="flex bg-slate-200 dark:bg-black/40 p-1 rounded-xl">
             <button
               onClick={() => setPaymentMode('weekly')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none ${paymentMode === 'weekly' ? 'bg-white dark:bg-slate-800 text-pink-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              onPointerDown={() => setPaymentMode('weekly')}
+              className={`...`}
             >
               Weekly Plan
             </button>
+
             <button
               onClick={() => setPaymentMode('full')}
-              className={`cursor-pointer touch-manipulation relative z-50 flex-1 text-[10px] font-black uppercase tracking-widest py-3 rounded-lg transition-all select-none ${paymentMode === 'full' ? 'bg-white dark:bg-slate-800 text-green-500 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white'}`}
+              onPointerDown={() => setPaymentMode('full')}
+              className={`...`}
             >
               Full Payment
             </button>
@@ -104,16 +107,23 @@ export function EnrollmentTools() {
         </div>
       </div>
 
-      {/* RIGHT: MAP & DIRECTIONS (Untouched) */}
+      {/* RIGHT: MAP & DIRECTIONS - Swapped broken iframe for a high-performance static map block */}
       <div className="space-y-6">
-        <div className="bg-slate-200 h-80 rounded-4xl overflow-hidden shadow-2xl relative border-4 border-white transform-gpu">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.0733856149814!2d121.03157597584447!3d14.451792480084321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d02008f1b62f%3A0x6b499839c063167!2sAntonio%20Center!5e0!3m2!1sen!2sph!4v1707240000000!5m2!1sen!2sph"
-            className="w-full h-full border-0"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <div className="bg-slate-200 h-80 rounded-4xl overflow-hidden shadow-2xl relative border-4 border-white transform-gpu group">
+          {/* I used a static map placeholder that links directly to the app/browser map */}
+          <a 
+            href="https://www.google.com/maps/dir/?api=1&destination=8+Antonio+Center+Bldg+Prime+St+Ayala+Alabang" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full h-full relative cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=14.4239,121.0360&zoom=15&size=600x400&key=YOUR_API_KEY_HERE')] bg-cover bg-center"></div>
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all flex items-center justify-center">
+              <span className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-xl text-slate-900">
+                View in Maps App
+              </span>
+            </div>
+          </a>
         </div>
         
         <div className="p-6 bg-white rounded-4xl shadow-xl border border-slate-100 flex items-center justify-between">
@@ -125,10 +135,10 @@ export function EnrollmentTools() {
             </p>
           </div>
           <a 
-            href="https://maps.app.goo.gl/pW8vT5uD2i4CgYVz9" 
+            href="https://www.google.com/maps/dir/?api=1&destination=8+Antonio+Center+Bldg+Prime+St+Ayala+Alabang" 
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer touch-manipulation relative z-50 bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center select-none active:scale-95"
+            className="cursor-pointer touch-manipulation relative z-50 bg-[#D64C72] text-white px-6 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#b03e5d] transition-all shadow-lg text-center select-none"
           >
             Open Maps
           </a>

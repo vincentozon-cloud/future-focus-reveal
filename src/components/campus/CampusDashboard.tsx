@@ -50,16 +50,17 @@ export default function CampusDashboard({ onEnroll, lang = 'en' }: { onEnroll: (
               ))}
 
               {/* NAVIGATION ARROWS */}
-              <button onClick={prev} className="cursor-pointer touch-manipulation select-none absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-[60] group/btn">
-                <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-pink-500 group-hover/btn:border-pink-400 group-hover/btn:scale-110 opacity-0 group-hover:opacity-100 group-hover/btn:text-white">
+              <button onClick={prev} onPointerDown={prev} className="cursor-pointer touch-manipulation select-none absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-[60] group/btn">
+                {/* Notice opacity-100 md:opacity-0 below. This ensures mobile users ALWAYS see the arrows since they can't hover */}
+                <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-pink-500 group-hover/btn:border-pink-400 group-hover/btn:scale-110 opacity-100 md:opacity-0 group-hover:opacity-100 group-hover/btn:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6 pointer-events-none group-hover/btn:-translate-x-1 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                   </svg>
                 </div>
               </button>
 
-              <button onClick={next} className="cursor-pointer touch-manipulation select-none absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-[60] group/btn">
-                <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-300 group-hover/btn:scale-110 group-hover/btn:text-[#1B4332] opacity-0 group-hover:opacity-100">
+              <button onClick={next} onPointerDown={next} className="cursor-pointer touch-manipulation select-none absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-[60] group/btn">
+                <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/20 text-slate-800 dark:text-white shadow-2xl transition-all duration-300 group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-300 group-hover/btn:scale-110 group-hover/btn:text-[#1B4332] opacity-100 md:opacity-0 group-hover:opacity-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6 pointer-events-none group-hover/btn:translate-x-1 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                   </svg>

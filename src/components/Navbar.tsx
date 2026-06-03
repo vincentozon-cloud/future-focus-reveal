@@ -16,56 +16,47 @@ export default function Navbar() {
 
   const currentTheme = mounted ? theme : 'dark';
 
+  // Extracting the functions so we can bind them to both onClick and onPointerDown
+  const handleLang = () => window.dispatchEvent(new CustomEvent('toggleLanguage'));
+  const handleLogin = () => window.dispatchEvent(new CustomEvent('toggleLogin'));
+  const handleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+
   return (
     <nav className="fixed top-0 left-0 w-full z-[9999] bg-white/90 dark:bg-black/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/10 shadow-sm transition-colors duration-300">
-      {/* I restructured the flexbox so the buttons are physically outside the scrollable container */}
-      <div className="max-w-7xl mx-auto px-4 w-full flex h-20 items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 w-full flex h-20 items-center justify-between relative">
         
-        {/* LEFT: Desktop Centering Spacer */}
+        {/* DESKTOP LEFT SPACER */}
         <div className="hidden md:block w-1/4 shrink-0"></div>
 
-        {/* CENTER: Scrollable Links */}
+        {/* CENTER: Navigation Links (SCROLLABLE) */}
+        {/* I added pr-[150px] so the links don't hide underneath the absolute buttons on small phones */}
         <div 
-          className="flex-1 md:w-2/4 flex items-center justify-start md:justify-center overflow-x-auto whitespace-nowrap hide-scrollbar gap-4 sm:gap-6 pr-4 md:pr-0"
+          className="flex-1 md:w-2/4 flex items-center justify-start md:justify-center overflow-x-auto whitespace-nowrap hide-scrollbar gap-4 sm:gap-6 pr-[150px] md:pr-0"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          <Link href="/" className={`inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all cursor-pointer touch-manipulation select-none py-2 ${pathname === '/' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>
-            Home
-          </Link>
-          <Link href="/#about" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">
-            About
-          </Link>
-          <Link href="/#programs" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">
-            Programs
-          </Link>
-          <Link href="/mock-tests" className={`inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all cursor-pointer touch-manipulation select-none py-2 ${pathname === '/mock-tests' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>
-            Mock Tests
-          </Link>
-          <Link href="/#contacts" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">
-            Contacts
-          </Link>
+          <Link href="/" className={`inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all cursor-pointer touch-manipulation select-none py-2 ${pathname === '/' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>Home</Link>
+          <Link href="/#about" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">About</Link>
+          <Link href="/#programs" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">Programs</Link>
+          <Link href="/mock-tests" className={`inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all cursor-pointer touch-manipulation select-none py-2 ${pathname === '/mock-tests' ? "text-emerald-600 dark:text-green-400 border-b-2 border-emerald-600 dark:border-green-400" : "text-gray-600 dark:text-gray-400 hover:text-emerald-600"}`}>Mock Tests</Link>
+          <Link href="/#contacts" className="inline-flex items-center text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 hover:text-emerald-600 transition-all cursor-pointer touch-manipulation select-none py-2">Contacts</Link>
         </div>
 
-        {/* RIGHT: Fixed Controls (No scrolling here = No cancelled clicks) */}
-        <div className="shrink-0 w-auto md:w-1/4 flex justify-end items-center gap-2 border-l border-slate-200 dark:border-white/10 pl-4 md:border-none md:pl-0">
-          <button 
-            onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} 
-            className="cursor-pointer touch-manipulation relative z-50 select-none p-3 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all text-slate-600 dark:text-white"
-          >
+        {/* RIGHT: Fixed Controls (ABSOLUTELY POSITIONED SO THEY DO NOT SCROLL) */}
+        {/* I added onPointerDown to brute-force the event instantly upon touch */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 sm:gap-2 bg-white/70 dark:bg-black/70 md:bg-transparent md:dark:bg-transparent backdrop-blur-md md:backdrop-blur-none px-3 py-2 md:p-0 rounded-full shadow-xl md:shadow-none border border-slate-200 dark:border-white/10 md:border-none z-50">
+          
+          <button onClick={handleTheme} onPointerDown={handleTheme} className="cursor-pointer touch-manipulation select-none p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all text-slate-600 dark:text-white">
             {currentTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
-          <button 
-            onClick={() => window.dispatchEvent(new CustomEvent('toggleLanguage'))}
-            className="cursor-pointer touch-manipulation relative z-50 select-none flex items-center justify-center min-w-[70px] px-3 py-3 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all"
-          >
+
+          <button onClick={handleLang} onPointerDown={handleLang} className="cursor-pointer touch-manipulation select-none flex items-center justify-center min-w-[60px] px-3 py-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-all">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-white">EN / KR</span>
           </button>
-          <button 
-            onClick={() => window.dispatchEvent(new CustomEvent('toggleLogin'))}
-            className="cursor-pointer touch-manipulation relative z-50 select-none p-3 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-all text-slate-600 dark:text-white"
-          >
+
+          <button onClick={handleLogin} onPointerDown={handleLogin} className="cursor-pointer touch-manipulation select-none p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-all text-slate-600 dark:text-white">
             <UserIcon />
           </button>
+          
         </div>
 
       </div>
